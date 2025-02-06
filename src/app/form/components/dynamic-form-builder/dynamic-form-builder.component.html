@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  @if(isLoading()){ Loading... }@else { @for (field of formConfig(); track
+  $index) {
+  <label [for]="field.name">{{ field.name }}</label>
+  @if(field.type){
+  <input [id]="field.name" [type]="field.type" [formControlName]="field.name" />
+  }
+  @if(form.get(field.name)?.invalid&&(form.get(field.name)?.dirty||form.get(field.name)?.touched)){
+  <div>
+    @if(form.get(field.name)?.errors?.['required']){
+    <small>{{ field.name }} is required.</small>
+
+    } @if(form.get(field.name)?.errors?.['minlength']){
+    <small>Minimum length is {{ field.maxLength }}.</small>
+
+    } @if(form.get(field.name)?.errors?.['maxlength']){
+    <small>Maximum length is {{ field.maxLength }}.</small>
+
+    } @if(form.get(field.name)?.errors?.['regex']){
+    <small>Invalid format.</small>
+
+    }
+  </div>
+
+  } } }
+
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>
