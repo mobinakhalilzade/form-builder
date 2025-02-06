@@ -1,0 +1,31 @@
+form {
+  background-color: #ffffffa6;
+  max-width: 26rem;
+  border-radius: 20px;
+  min-height: auto;
+  padding: 60px 39px 40px 49px;
+  opacity: 1;
+
+  h1 {
+    font-size: 1.25rem;
+    text-align: center;
+    padding-bottom: 24px;
+    font-weight: 700;
+  }
+
+    .form-submit {
+    width: 100%;
+  }
+
+  .spinner {
+    display: flex;
+    justify-content: center;
+  }
+
+  .input {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 8px;
+  }
+}

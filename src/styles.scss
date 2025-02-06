@@ -1,8 +1,37 @@
-body,
-html {
+@use '@angular/material' as mat;
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   margin: 0;
   padding: 0;
-  font-family: "Roboto";
   scroll-behavior: smooth;
   height: 100vh;
+
+  @include mat.theme((color: (theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    ));
+}
+
+html {
+  height: 100vh;
+}
+
+mat-form-field {
+  mat-label {
+    font-size: 14px;
+  }
+
+  &.mat-form-field-should-float mat-label {
+    font-size: 12px;
+  }
+
+  width: 100%;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: rgb(244.8, 244.8, 244.8) !important;
 }

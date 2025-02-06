@@ -1,28 +1,63 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  @if(isLoading()){ Loading... }@else { @for (field of formConfig(); track
-  $index) {
-  <label [for]="field.name">{{ field.name }}</label>
-  @if(field.type){
-  <input [id]="field.name" [type]="field.type" [formControlName]="field.name" />
-  }
-  @if(form.get(field.name)?.invalid&&(form.get(field.name)?.dirty||form.get(field.name)?.touched)){
-  <div>
-    @if(form.get(field.name)?.errors?.['required']){
-    <small>{{ field.name }} is required.</small>
-
-    } @if(form.get(field.name)?.errors?.['minlength']){
-    <small>Minimum length is {{ field.maxLength }}.</small>
-
-    } @if(form.get(field.name)?.errors?.['maxlength']){
-    <small>Maximum length is {{ field.maxLength }}.</small>
-
-    } @if(form.get(field.name)?.errors?.['regex']){
-    <small>Invalid format.</small>
-
+  @if(isLoading()){
+  <div class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+  }@else {
+  <h1>
+    {{ formConfig().form.title }}
+  </h1>
+  @for (field of formConfig().form.fields; track $index) {
+  <div class="input">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ field.title }}</mat-label>
+      <input
+        matInput
+        [formControlName]="field.name"
+        [type]="field.type"
+        #tooltip="matTooltip"
+        [matTooltip]="field.description ? field.description : ''"
+        [matTooltipPosition]="'after'"
+        matTooltipHideDelay="2000"
+      />
+      <mat-error
+        #tooltip="matTooltip"
+        [matTooltip]="field.errorMessage ? field.errorMessage : ''"
+        [matTooltipPosition]="'below'"
+        matTooltipHideDelay="2000"
+        >{{ field.errorMessage }}</mat-error
+      >
+      @if(field.type==='NEW_PASSWORD'){
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hidePassword($event)"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide()"
+      >
+        <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+    @if(field.info){
+    <button mat-icon-button
+         #tooltip="matTooltip"
+        [matTooltip]="field.info"
+        [matTooltipPosition]="'below'"
+        matTooltipHideDelay="1000">
+      <mat-icon>info</mat-icon>
+    </button>
     }
   </div>
-
-  } } }
-
-  <button type="submit" [disabled]="form.invalid">Submit</button>
+  } }
+  <button
+    type="submit"
+    mat-flat-button
+    extended
+    [disabled]="form.invalid"
+    color="primary"
+    class="form-submit"
+  >
+    {{formConfig().form.submitLabel}}
+  </button>
 </form>
