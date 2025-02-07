@@ -14,7 +14,13 @@
       <input
         matInput
         [formControlName]="field.name"
-        [type]="field.type"
+        [type]="
+          field.type === 'NEW_PASSWORD'
+            ? isPasswordVisible()
+              ? 'text'
+              : 'password'
+            : 'text'
+        "
         #tooltip="matTooltip"
         [matTooltip]="field.description ? field.description : ''"
         [matTooltipPosition]="'after'"
@@ -33,9 +39,11 @@
         matSuffix
         (click)="hidePassword($event)"
         [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide()"
+        [attr.aria-pressed]="isPasswordVisible()"
       >
-        <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+        <mat-icon>{{
+          isPasswordVisible() ? "visibility_off" : "visibility"
+        }}</mat-icon>
       </button>
       }
     </mat-form-field>
@@ -51,13 +59,19 @@
     </button>
     }
   </div>
-  @if(field.type==='NEW_PASSWORD'){
+  @if(field.type === 'NEW_PASSWORD') {
   <mat-form-field appearance="fill">
-    <mat-label>{{ "Confirm Password" }}</mat-label>
-    <input matInput />
+    <mat-label>Confirm Password</mat-label>
+    <input
+      matInput
+      formControlName="confirmPassword"
+      [type]="isPasswordVisible() ? 'text' : 'password'"
+    />
     <mat-error
       #tooltip="matTooltip"
-      [matTooltip]="field.errorMessage ? field.errorMessage : ''"
+      [matTooltip]="
+        field.errorMessage ? field.errorMessage : 'Passwords do not match.'
+      "
       [matTooltipPosition]="'below'"
       matTooltipHideDelay="2000"
       >{{ field.errorMessage }}</mat-error

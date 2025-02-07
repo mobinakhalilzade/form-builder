@@ -2,7 +2,7 @@
   <div class="footer__right">
     @for (item of footerItems(); track $index) {
       @if(!item.position) {
-        <div class="footer__item" (click)="item.action">
+        <div class="footer__item">
           @if (item.icon) {
             <mat-icon>{{ item.icon }}</mat-icon>
           }
@@ -17,7 +17,7 @@
   <div class="footer__left">
     @for (item of footerItems(); track $index) {
       @if(item.position === 'aside') {
-        <div class="footer__item" (click)="item.action">
+        <div class="footer__item">
           @if (item.icon) {
             <mat-icon>{{ item.icon }}</mat-icon>
           }

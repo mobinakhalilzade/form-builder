@@ -10,5 +10,5 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class FooterComponent {
   footerItems =
-    signal<{ title: string; icon: string; action: '', position?:string }[]>(FooterItems);
+    signal<{ title: string; icon: string; position?: string }[]>(FooterItems);
 }

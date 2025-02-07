@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormComponent } from './form/features/form/form.component';
-import { FooterComponent } from "./main/footer/footer.component";
+import { FooterComponent } from './main/footer/footer.component';
 
 @Component({
   selector: 'app-root',
