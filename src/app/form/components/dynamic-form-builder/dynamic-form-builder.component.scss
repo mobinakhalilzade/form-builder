@@ -1,4 +1,4 @@
-form {
+.register-form {
   background-color: #ffffffa6;
   max-width: 26rem;
   border-radius: 20px;
@@ -6,26 +6,48 @@ form {
   padding: 60px 39px 40px 49px;
   opacity: 1;
 
-  h1 {
+  &__title {
     font-size: 1.25rem;
     text-align: center;
     padding-bottom: 24px;
     font-weight: 700;
   }
 
-    .form-submit {
+  &__button {
     width: 100%;
+    border-radius: 8px;
   }
 
-  .spinner {
+  &__spinner {
     display: flex;
     justify-content: center;
   }
 
-  .input {
+  &__input {
     display: flex;
     justify-content: space-around;
     align-items: center;
     gap: 8px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: start;
+  }
+
+  &__page {
+    font-size: .75rem;
+    margin: 16px;
+
+    a {
+      color: rgba(33, 150, 243);
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+        font-weight: bold;
+      }
+    }
   }
 }

@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
-  height: 100vh;
+  // height: 100vh;
 
   @include mat.theme((color: (theme-type: light,
         primary: mat.$azure-palette,
@@ -17,7 +17,7 @@ body {
 }
 
 html {
-  height: 100vh;
+  // height: 100vh;
 }
 
 mat-form-field {

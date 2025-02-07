@@ -1,14 +1,14 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form class="register-form" [formGroup]="form" (ngSubmit)="onSubmit()">
   @if(isLoading()){
-  <div class="spinner">
+  <div class="register-form__spinner">
     <mat-spinner></mat-spinner>
   </div>
   }@else {
-  <h1>
+  <h1 class="register-form__title">
     {{ formConfig().form.title }}
   </h1>
   @for (field of formConfig().form.fields; track $index) {
-  <div class="input">
+  <div class="register-form__input">
     <mat-form-field appearance="fill">
       <mat-label>{{ field.title }}</mat-label>
       <input
@@ -40,24 +40,45 @@
       }
     </mat-form-field>
     @if(field.info){
-    <button mat-icon-button
-         #tooltip="matTooltip"
-        [matTooltip]="field.info"
-        [matTooltipPosition]="'below'"
-        matTooltipHideDelay="1000">
+    <button
+      mat-icon-button
+      #tooltip="matTooltip"
+      [matTooltip]="field.info"
+      [matTooltipPosition]="'below'"
+      matTooltipHideDelay="1000"
+    >
       <mat-icon>info</mat-icon>
     </button>
     }
   </div>
-  } }
+  @if(field.type==='NEW_PASSWORD'){
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "Confirm Password" }}</mat-label>
+    <input matInput />
+    <mat-error
+      #tooltip="matTooltip"
+      [matTooltip]="field.errorMessage ? field.errorMessage : ''"
+      [matTooltipPosition]="'below'"
+      matTooltipHideDelay="2000"
+      >{{ field.errorMessage }}</mat-error
+    >
+  </mat-form-field>
+  } } }
   <button
     type="submit"
     mat-flat-button
     extended
     [disabled]="form.invalid"
     color="primary"
-    class="form-submit"
+    class="register-form__button"
   >
-    {{formConfig().form.submitLabel}}
+    {{ formConfig().form.submitLabel }}
   </button>
+  <ul>
+    @for (page of authPages(); track $index) {
+    <li class="register-form__page">
+      <a [routerLink]="page.path">{{ page.title }}</a>
+    </li>
+    }
+  </ul>
 </form>

@@ -17,6 +17,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TooltipPosition, MatTooltipModule } from '@angular/material/tooltip';
+import { AuthPages } from '../../data-access/consts/auth-pages.const';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dynamic-form-builder',
@@ -28,6 +30,7 @@ import { TooltipPosition, MatTooltipModule } from '@angular/material/tooltip';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
+    RouterModule
   ],
   templateUrl: './dynamic-form-builder.component.html',
   styleUrl: './dynamic-form-builder.component.scss',
@@ -40,6 +43,7 @@ export class DynamicFormBuilderComponent implements OnInit, OnDestroy {
   isLoading = signal<boolean>(false);
   hide = signal(true);
   private destroy$ = new Subject<void>();
+  authPages = signal<{ title: string; path: string }[]>(AuthPages);
 
   ngOnInit(): void {
     this.getFormConfig();
